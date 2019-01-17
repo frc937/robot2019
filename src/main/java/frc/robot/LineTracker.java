@@ -3,20 +3,26 @@
 
 To actually hook these components up, ask Tom, he probably knows what to do
 
+we got a new ultrasonic rangefinder this year in the kit of parts
+rangefinder datasheet: https://www.maxbotix.com/documents/HRLV-MaxSonar-EZ_Datasheet.pdf
+
+the vex line trackers should work on 5V analog, so if you can get a wire for it,
+you can plug the line sensors right into the roborio analog sensors
+I couldn't find a datasheet for the line trackers
  */
 
 package frc.robot;
 
-//import whatever we need for line sensors
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.AnalogInput;
 
 public class LineTracker {
 
   //Declare variables
-  LineSensor frontLeft;
-  LineSensor frontRight;
-  LineSensor backLeft;
-  LineSensor backRight;
+  AnalogInput frontLeft;
+  AnalogInput frontRight;
+  AnalogInput backLeft;
+  AnalogInput backRight;
 
   boolean frontLeftFlag = false;
   boolean frontRightFlag = false;
@@ -35,7 +41,10 @@ public class LineTracker {
     rangefinder = new Ultrasonic(Settings.ultrasonicPingPort, Settings.ultrasonicEchoPort, Ultrasonic.Unit.kInches);
 
     //setup line trackers
-
+    frontLeft = new AnalogInput(Settings.lineTrackFrontLeftPort);
+    frontLeft = new AnalogInput(Settings.lineTrackFrontRightPort);
+    frontLeft = new AnalogInput(Settings.lineTrackBackLeftPort);
+    frontLeft = new AnalogInput(Settings.lineTrackBackRightPort);
   }
 
   //resets variables
@@ -109,25 +118,25 @@ public class LineTracker {
   }
 
   private boolean getFrontLeft() {
-    final boolean onLine = frontLeft.methodToGetSensorValue() > Settings.lineTrackThreshold;
+    final boolean onLine = frontLeft.getValue() > Settings.lineTrackThreshold;
     //frontLeftFlag = onLine;
     return onLine;
   }
 
   private boolean getFrontRight() {
-    final boolean onLine = frontRight.methodToGetSensorValue() > Settings.lineTrackThreshold;
+    final boolean onLine = frontRight.getValue() > Settings.lineTrackThreshold;
     //frontLeftFlag = onLine;
     return onLine;
   }
 
   private boolean getBackLeft() {
-    final boolean onLine = backLeft.methodToGetSensorValue() > Settings.lineTrackThreshold;
+    final boolean onLine = backLeft.getValue() > Settings.lineTrackThreshold;
     //frontLeftFlag = onLine;
     return onLine;
   }
 
   private boolean getBackRight() {
-    final boolean onLine = backRight.methodToGetSensorValue() > Settings.lineTrackThreshold;
+    final boolean onLine = backRight.getValue() > Settings.lineTrackThreshold;
     //frontLeftFlag = onLine;
     return onLine;
   }
