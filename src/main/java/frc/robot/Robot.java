@@ -26,12 +26,15 @@ public class Robot extends TimedRobot {
 
   DoubleSolenoid solenoid;
 
+  Camera leftCamera;
+  Camera rightCamera;
+
   //Runs once when the robot turns on
   @Override
   public void robotInit() {
     
-    Camera leftCamera = new Camera();
-    Camera rightCamera = new Camera();
+    leftCamera = new Camera();
+    rightCamera = new Camera();
 
     frontLeft = new Talon(Settings.frontLeftPort);
     frontRight = new Spark(Settings.frontRightPort);
