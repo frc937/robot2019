@@ -17,7 +17,6 @@ public class Settings {
   public static final int solenoidBackwardPort = 1;
 
   //controller
-  public static final int controllerNumber          = 0;
-  public static final int controllerRightStickXAxis = 4;
+  public static final int controllerNumber = 0;
 
 }
