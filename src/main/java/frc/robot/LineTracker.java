@@ -9,6 +9,8 @@ rangefinder datasheet: https://www.maxbotix.com/documents/HRLV-MaxSonar-EZ_Datas
 the vex line trackers should work on 5V analog, so if you can get a wire for it,
 you can plug the line sensors right into the roborio analog sensors
 I couldn't find a datasheet for the line trackers
+
+PS. All of this code is completely untested it probably doesn't all work
  */
 
 package frc.robot;
@@ -19,19 +21,24 @@ import edu.wpi.first.wpilibj.AnalogInput;
 public class LineTracker {
 
   //Declare variables
-  AnalogInput frontLeft;
-  AnalogInput frontRight;
-  AnalogInput backLeft;
-  AnalogInput backRight;
+  private AnalogInput frontLeft;
+  private AnalogInput frontRight;
+  private AnalogInput backLeft;
+  private AnalogInput backRight;
 
-  boolean frontLeftFlag = false;
-  boolean frontRightFlag = false;
-  boolean backLeftFlag = false;
-  boolean backRightFlag = false;
+  private boolean frontLeftFlag = false;
+  private boolean frontRightFlag = false;
+  private boolean backLeftFlag = false;
+  private boolean backRightFlag = false;
 
-  Ultrasonic rangefinder;
+  private boolean frontOnLeft = false;
+  private boolean frontOnRight = false;
+  private boolean backOnLeft = false;
+  private boolean backOnRight = false;
 
-  Drivetrain drivetrain;
+  private Ultrasonic rangefinder;
+
+  private Drivetrain drivetrain;
 
   //Constructor
   public LineTracker(Drivetrain drivetrain) {
@@ -104,13 +111,83 @@ public class LineTracker {
   }
 
   //get which side of the line the front sensor is on
+  //THIS IS WHERE IT'S PROBABLY BROKEN
   private SIDE getFrontSide() {
-    return SIDE.center;
+
+    //check if it's moving to the side
+    if(frontLeftFlag && frontRightFlag) {
+      if(!frontOnRight) {
+        if(!getFrontRight()) {
+          frontOnRight = true;
+        }
+      } else if (!frontOnLeft) {
+        if(!getFrontLeft()) {
+          frontOnLeft = true;
+        }
+      }
+    }
+
+    //check if it's moving to the center
+    if(frontOnLeft || frontOnRight) {
+      if(frontLeftFlag && !getFrontLeft()) {
+        frontOnLeft = false;
+      } else if(frontOnRight && !getFrontRight()) {
+        frontOnRight = false;
+      }
+    }
+
+    //set flags
+    frontLeftFlag = getFrontLeft();
+    frontRightFlag = getFrontRight();
+
+    //return answer
+    if(frontOnLeft) {
+      return SIDE.left
+    } else if (frontOnRight) {
+      return SIDE.right
+    } else {
+      return SIDE.center;
+    }
   }
 
   //get which side of the line the back sensor is on
+  //THIS IS WHERE IT'S PROBABLY BROKEN
   private SIDE getBackSide() {
-    return SIDE.center;
+
+    //check if it's moving to the side
+    if(backLeftFlag && backRightFlag) {
+      if(!backOnRight) {
+        if(!getBackRight()) {
+          backOnRight = true;
+        }
+      } else if (!backOnLeft) {
+        if(!getBackLeft()) {
+          backOnLeft = true;
+        }
+      }
+    }
+
+    //check if it's moving to the center
+    if(backOnLeft || backOnRight) {
+      if(backLeftFlag && !getBackLeft()) {
+        backOnLeft = false;
+      } else if(backOnRight && !getBackRight()) {
+        backOnRight = false;
+      }
+    }
+
+    //set flags
+    backLeftFlag = getBackLeft();
+    backRightFlag = getBackRight();
+
+    //return answer
+    if(backOnLeft) {
+      return SIDE.left
+    } else if (backOnRight) {
+      return SIDE.right
+    } else {
+      return SIDE.center;
+    }
   }
 
   private boolean shouldStop() {
@@ -119,25 +196,21 @@ public class LineTracker {
 
   private boolean getFrontLeft() {
     final boolean onLine = frontLeft.getValue() > Settings.lineTrackThreshold;
-    //frontLeftFlag = onLine;
     return onLine;
   }
 
   private boolean getFrontRight() {
     final boolean onLine = frontRight.getValue() > Settings.lineTrackThreshold;
-    //frontLeftFlag = onLine;
     return onLine;
   }
 
   private boolean getBackLeft() {
     final boolean onLine = backLeft.getValue() > Settings.lineTrackThreshold;
-    //frontLeftFlag = onLine;
     return onLine;
   }
 
   private boolean getBackRight() {
     final boolean onLine = backRight.getValue() > Settings.lineTrackThreshold;
-    //frontLeftFlag = onLine;
     return onLine;
   }
 }
