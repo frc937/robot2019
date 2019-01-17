@@ -1,5 +1,10 @@
+/*
+ * Main loops and methods for the robot
+ */
+
 package frc.robot;
 
+//Import packages
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Spark;
@@ -9,49 +14,46 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Robot extends TimedRobot {
-  private static final int kFrontLeftChannel = 2;
-  private static final int kRearLeftChannel = 3;
-  private static final int kFrontRightChannel = 1;
-  private static final int kRearRightChannel = 0;
 
-  private static final int kJoystickChannel = 0;
-
+  //Declare variables
   private MecanumDrive m_robotDrive;
   private Joystick m_stick;
 
-
   Talon frontLeft;
-  Talon rearLeft;
   Spark frontRight;
-  Spark rearRight;
+  Talon backLeft;
+  Spark backRight;
 
   DoubleSolenoid solenoid;
 
+  //Runs once when the robot turns on
   @Override
   public void robotInit() {
     CameraServer.getInstance().startAutomaticCapture();
     CameraServer.getInstance().startAutomaticCapture();
 
-    frontLeft = new Talon(kFrontLeftChannel);
-    rearLeft = new Talon(kRearLeftChannel);
-    frontRight = new Spark(kFrontRightChannel);
-    rearRight = new Spark(kRearRightChannel);
+    frontLeft = new Talon(Settings.frontLeftPort);
+    frontRight = new Spark(Settings.frontRightPort);
+    backLeft = new Talon(Settings.backLeftPort);
+    backRight = new Spark(Settings.backRightPort);
 
-    solenoid = new DoubleSolenoid(0, 1);
+    solenoid = new DoubleSolenoid(Settings.solenoidForwardPort, Settings.solenoidBackwardPort);
 
     // Invert the left side motors.
     // You may need to change or remove this to match your robot.
     frontLeft.setInverted(true);
-    rearLeft.setInverted(true);
+    backLeft.setInverted(true);
 
-    m_robotDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
+    m_robotDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
-    m_stick = new Joystick(kJoystickChannel);
-    m_stick.setZChannel(4);
+    m_stick = new Joystick(Settings.controllerNumber);
+    m_stick.setZChannel(Settings.controllerRightStickXAxis);
   }
 
+  //Loops continuously when teleop mode is enabled
   @Override
   public void teleopPeriodic() {
+
     // Use the joystick X axis for lateral movement, Y axis for forward
     // movement, and Z axis for rotation.
     m_robotDrive.driveCartesian(m_stick.getX(), m_stick.getY(), m_stick.getZ(), 0.0);
