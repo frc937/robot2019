@@ -39,7 +39,11 @@ public class Drivetrain {
 
   public void driverControl() {
     // Use the joystick X axis for lateral movement, Y axis for forward movement, and Z axis for rotation.
-    drivetrain.driveCartesian(controller.getX(Hand.kLeft), controller.getY(Hand.kLeft), controller.getX(Hand.kRight), 0.0);
+    private final double x = controller.getX(Hand.kLeft);
+    private final double y = controller.getY(Hand.kLeft);
+    private final double z = controller.getX(Hand.kRight);
+
+    drivetrain.driveCartesian(x, y, z, 0.0);
   }
 
 }
