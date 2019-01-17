@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-//Import packages
   import edu.wpi.first.wpilibj.Talon;
   import edu.wpi.first.wpilibj.XboxController;
   import edu.wpi.first.wpilibj.Spark;
@@ -35,7 +34,6 @@ public class Drivetrain {
   }
 
   public void driverControl(XboxController controller) {
-
     // Use the joystick X axis for lateral movement, Y axis for forward movement, and Z axis for rotation.
     drivetrain.driveCartesian(controller.getX(Hand.kLeft), controller.getY(Hand.kLeft), controller.getX(Hand.kRight), 0.0);
   }

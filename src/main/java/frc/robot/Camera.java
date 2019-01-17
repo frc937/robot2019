@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-//Import packages
 import edu.wpi.first.cameraserver.CameraServer;
 
 public class Camera {
@@ -17,5 +16,4 @@ public class Camera {
   private void startCamera() {
     CameraServer.getInstance().startAutomaticCapture();
   }
-
 }
