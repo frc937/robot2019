@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Robot extends TimedRobot {
@@ -30,8 +29,9 @@ public class Robot extends TimedRobot {
   //Runs once when the robot turns on
   @Override
   public void robotInit() {
-    CameraServer.getInstance().startAutomaticCapture();
-    CameraServer.getInstance().startAutomaticCapture();
+    
+    Camera leftCamera = new Camera();
+    Camera rightCamera = new Camera();
 
     frontLeft = new Talon(Settings.frontLeftPort);
     frontRight = new Spark(Settings.frontRightPort);
