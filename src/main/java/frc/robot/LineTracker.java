@@ -8,7 +8,7 @@ To actually hook these components up, ask Tom, he probably knows what to do
 package frc.robot;
 
 //import whatever we need for line sensors
-//import whatever we need for the ultrasonic rangefinder
+import edu.wpi.first.wpilibj.Ultrasonic;
 
 public class LineTracker {
 
@@ -23,13 +23,19 @@ public class LineTracker {
   boolean backLeftFlag = false;
   boolean backRightFlag = false;
 
-  UltrasonicRangefinder rangefinder;
+  Ultrasonic rangefinder;
 
   Drivetrain drivetrain;
 
   //Constructor
   public LineTracker(Drivetrain drivetrain) {
     this.drivetrain = drivetrain;
+
+    //setup rangefinder to use inches
+    rangefinder = new Ultrasonic(Settings.ultrasonicPingPort, Settings.ultrasonicEchoPort, Ultrasonic.Unit.kInches);
+
+    //setup line trackers
+
   }
 
   //resets variables
@@ -59,44 +65,68 @@ public class LineTracker {
   }
 
   private boolean isAimedLeft() {
-    return false;
+    final SIDE side = getFrontSide();
+
+    return side == SIDE.left;
   }
 
   private boolean isAimedRight() {
-    return false;
+    final SIDE side = getFrontSide();
+
+    return side == SIDE.right;
   }
 
   private boolean isTooLeft() {
-    return false;
+    final SIDE front = getFrontSide();
+    final SIDE back = getBackSide();
+
+    return front == SIDE.left && back == SIDE.left;
   }
 
   private boolean isTooRight() {
-    return false;
+    final SIDE front = getFrontSide();
+    final SIDE back = getBackSide();
+
+    return front == SIDE.right && back == SIDE.right;
+  }
+
+  private enum SIDE {
+    left, center, right
+  }
+
+  //get which side of the line the front sensor is on
+  private SIDE getFrontSide() {
+    return SIDE.center;
+  }
+
+  //get which side of the line the back sensor is on
+  private SIDE getBackSide() {
+    return SIDE.center;
   }
 
   private boolean shouldStop() {
-    return rangefinder.methodToGetDistance() < Settings.lineTrackStopDistance;
+    return rangefinder.getRangeInches() < Settings.lineTrackStopDistance;
   }
 
-  private boolean checkFrontLeft() {
+  private boolean getFrontLeft() {
     final boolean onLine = frontLeft.methodToGetSensorValue() > Settings.lineTrackThreshold;
     //frontLeftFlag = onLine;
     return onLine;
   }
 
-  private boolean checkFrontRight() {
+  private boolean getFrontRight() {
     final boolean onLine = frontRight.methodToGetSensorValue() > Settings.lineTrackThreshold;
     //frontLeftFlag = onLine;
     return onLine;
   }
 
-  private boolean checkBackLeft() {
+  private boolean getBackLeft() {
     final boolean onLine = backLeft.methodToGetSensorValue() > Settings.lineTrackThreshold;
     //frontLeftFlag = onLine;
     return onLine;
   }
 
-  private boolean checkBackRight() {
+  private boolean getBackRight() {
     final boolean onLine = backRight.methodToGetSensorValue() > Settings.lineTrackThreshold;
     //frontLeftFlag = onLine;
     return onLine;

@@ -25,4 +25,6 @@ public class Settings {
   public static final double lineTrackThreshold     = 0.5;
   public static final double lineTrackMoveSpeed     = 0.4;
   public static final double lineTrackSidewaysSpeed = 0.3;
+  public static final int ultrasonicPingPort = 0;
+  public static final int ultrasonicEchoPort = 1;
 }
