@@ -13,15 +13,17 @@ package frc.robot;
 public class Drivetrain {
 
   //Declare variables
-  Talon frontLeft;
-  Spark frontRight;
-  Talon backLeft;
-  Spark backRight;
+  private Talon frontLeft;
+  private Spark frontRight;
+  private Talon backLeft;
+  private Spark backRight;
 
   private MecanumDrive drivetrain;
 
+  private XboxController controller;
+
   //constructor (run whenever the: = new Drivetrain() code is run)
-  public Drivetrain() {
+  public Drivetrain(XboxController controller) {
     frontLeft = new Talon(Settings.frontLeftPort);
     frontRight = new Spark(Settings.frontRightPort);
     backLeft = new Talon(Settings.backLeftPort);
@@ -31,9 +33,11 @@ public class Drivetrain {
     backLeft.setInverted(true);
 
     drivetrain = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+
+    this.controller = controller;
   }
 
-  public void driverControl(XboxController controller) {
+  public void driverControl() {
     // Use the joystick X axis for lateral movement, Y axis for forward movement, and Z axis for rotation.
     drivetrain.driveCartesian(controller.getX(Hand.kLeft), controller.getY(Hand.kLeft), controller.getX(Hand.kRight), 0.0);
   }

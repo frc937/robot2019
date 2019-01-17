@@ -12,12 +12,16 @@ public class TestSolenoid {
   //Declare variables
   private DoubleSolenoid testSolenoid;
 
+  private XboxController controller;
+
   //contructor
-  public TestSolenoid() {
+  public TestSolenoid(XboxController controller) {
     testSolenoid = new DoubleSolenoid(Settings.solenoidForwardPort, Settings.solenoidBackwardPort);
+
+    this.controller = controller;
   }
 
-  public void update(XboxController controller) {
+  public void update() {
     if(controller.getAButton()) {
       testSolenoid.set(DoubleSolenoid.Value.kForward);
     } else if(controller.getBButton()) {

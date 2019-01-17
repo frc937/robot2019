@@ -20,8 +20,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     controller = new XboxController(Settings.controllerNumber);
-    drivetrain = new Drivetrain();
-    testSolenoid = new TestSolenoid();
+    drivetrain = new Drivetrain(controller);
+    testSolenoid = new TestSolenoid(controller);
     leftCamera = new Camera();
     rightCamera = new Camera();
   }
@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
   //Loops continuously when teleop mode is enabled
   @Override
   public void teleopPeriodic() {
-    drivetrain.driverControl(controller);
-    testSolenoid.update(controller);
+    drivetrain.driverControl();
+    testSolenoid.update();
   }
 }
