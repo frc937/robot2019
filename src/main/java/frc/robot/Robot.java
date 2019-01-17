@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -13,11 +6,8 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
-/**
- * This is a demo program showing how to use Mecanum control with the RobotDrive
- * class.
- */
 public class Robot extends TimedRobot {
   private static final int kFrontLeftChannel = 2;
   private static final int kRearLeftChannel = 3;
@@ -29,15 +19,25 @@ public class Robot extends TimedRobot {
   private MecanumDrive m_robotDrive;
   private Joystick m_stick;
 
+
+  Talon frontLeft;
+  Talon rearLeft;
+  Spark frontRight;
+  Spark rearRight;
+
+  DoubleSolenoid solenoid;
+
   @Override
   public void robotInit() {
     CameraServer.getInstance().startAutomaticCapture();
     CameraServer.getInstance().startAutomaticCapture();
 
-    Talon frontLeft = new Talon(kFrontLeftChannel);
-    Talon rearLeft = new Talon(kRearLeftChannel);
-    Spark frontRight = new Spark(kFrontRightChannel);
-    Spark rearRight = new Spark(kRearRightChannel);
+    frontLeft = new Talon(kFrontLeftChannel);
+    rearLeft = new Talon(kRearLeftChannel);
+    frontRight = new Spark(kFrontRightChannel);
+    rearRight = new Spark(kRearRightChannel);
+
+    solenoid = new DoubleSolenoid(0, 1);
 
     // Invert the left side motors.
     // You may need to change or remove this to match your robot.
@@ -55,6 +55,14 @@ public class Robot extends TimedRobot {
     // Use the joystick X axis for lateral movement, Y axis for forward
     // movement, and Z axis for rotation.
     m_robotDrive.driveCartesian(m_stick.getX(), m_stick.getY(), m_stick.getZ(), 0.0);
+
+    if(m_stick.getRawButton(1)) {
+      solenoid.set(DoubleSolenoid.Value.kForward);
+    } else if(m_stick.getRawButton(2)) {
+      solenoid.set(DoubleSolenoid.Value.kReverse);
+    } else {
+      solenoid.set(DoubleSolenoid.Value.kOff);
+    }
 
   }
 }
