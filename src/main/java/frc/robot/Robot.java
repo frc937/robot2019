@@ -12,7 +12,8 @@ public class Robot extends TimedRobot {
   //Declare variables
   private XboxController controller;
   private Drivetrain drivetrain;
-  private TestSolenoid testSolenoid;
+  private Arm arm;
+  private Claw claw;
   private Camera leftCamera;
   private Camera rightCamera;
 
@@ -20,8 +21,13 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     controller = new XboxController(Settings.controllerNumber);
+    
     drivetrain = new Drivetrain(controller);
-    testSolenoid = new TestSolenoid(controller);
+    
+    arm = new Arm(controller);
+    
+    claw = new Claw(controller);
+    
     leftCamera = new Camera();
     rightCamera = new Camera();
   }
@@ -30,6 +36,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     drivetrain.driverControl();
-    testSolenoid.update();
+    
+    arm.update();
+    claw.update();
   }
 }
