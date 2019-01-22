@@ -13,12 +13,12 @@ public class Settings {
   public static final int backRightPort  = 3;
   
   //solenoids
-  public static final int solenoidForwardPort1  = 0;
-  public static final int solenoidBackwardPort1 = 1;
-  public static final int solenoidForwardPort2 = 2;
-  public static final int solenoidBackwardPort2 = 3;
-  public static final int solenoidForwardPort3 = 4;
-  public static final int solenoidBackwardPort3 = 5;
+  public static final int clawPushOutPort  = 0;
+  public static final int clawPushInPort = 1;
+  public static final int clawMoveOutPort = 2;
+  public static final int clawMoveInPort = 3;
+  public static final int clawGrabOutPort = 4;
+  public static final int clawGrabInPort = 5;
 
 
   //controller
