@@ -4,32 +4,42 @@
 
 package frc.robot;
 
+//import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.*;
 
 public class Robot extends TimedRobot {
 
-  //Declare variables
-  private XboxController controller;
-  private Drivetrain drivetrain;
-  private TestSolenoid testSolenoid;
+  /*
+  * Declare variables
+  */
+  public static XboxController controller;
+  public static Drivetrain drivetrain;
   private Camera leftCamera;
   private Camera rightCamera;
+  public static ClawGrab grabSolenoid;
+  public static ClawMove moveSolenoid;
+  public static ClawPush pushSolenoid;
 
-  //Runs once when the robot turns on
+  /*
+  * Constructor
+  */
   @Override
   public void robotInit() {
-    controller = new XboxController(Settings.controllerNumber);
+    controller = new XboxController(RobotMap.CONTROLLER_NUMBER);
     drivetrain = new Drivetrain(controller);
-    testSolenoid = new TestSolenoid(controller);
+    grabSolenoid = new ClawGrab();
     leftCamera = new Camera();
     rightCamera = new Camera();
   }
 
-  //Loops continuously when teleop mode is enabled
+  /*
+  * Interface methods
+  */
   @Override
   public void teleopPeriodic() {
     drivetrain.driverControl();
-    testSolenoid.update();
+    //grabSolenoid.update();
   }
 }
