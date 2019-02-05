@@ -6,6 +6,7 @@ package frc.robot.commands.manipulation.claw;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotState;
 
 public class PushOut extends Command {
     public PushOut() {
@@ -30,6 +31,7 @@ public class PushOut extends Command {
     @Override
     protected void end() {
         Robot.moveSolenoid.off();
+        RobotState.isPushed = true;
     }
 
     @Override

@@ -7,6 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.RobotState;
+import frc.robot.commands.manipulation.claw.*;
 
 public class OperatingInterface {
 
@@ -27,6 +29,10 @@ public class OperatingInterface {
     private Button rightStick;
     private Button leftTrigger;
     private Button rightTrigger;
+    private Button dPadLeft;
+    private Button dPadRight;
+    private Button dPadUp;
+    private Button dPadDown;
 
     /*
     * constructor
@@ -44,6 +50,32 @@ public class OperatingInterface {
         rightStick = new JoystickButton(controller, RobotMap.RIGHT_STICK_NUMBER);
         leftTrigger = new JoystickButton(controller, RobotMap.LEFT_TRIGGER);
         rightTrigger = new JoystickButton(controller, RobotMap.RIGHT_TRIGGER);
+        dPadLeft = new JoystickButton(controller, RobotMap.DPAD_LEFT);
+        dPadRight = new JoystickButton(controller, RobotMap.DPAD_RIGHT);
+        dPadUp = new JoystickButton(controller, RobotMap.DPAD_UP);
+        dPadDown = new JoystickButton(controller, RobotMap.DPAD_DOWN);
+
+
+        if(RobotState.isOpen = false) {
+            leftBumper.whenPressed(new ClawOpen());
+        }
+        
+        if(RobotState.isOpen = true) {
+            leftBumper.whenPressed(new ClawClose());
+        }
+
+        if(RobotState.isPushed = false) {
+            rightBumper.whenPressed(new PushOut());
+        }
+
+        if(RobotState.isPushed = true) {
+            rightBumper.whenPressed(new PushIn());
+        }
+
+        dPadLeft.whenPressed(new ClawBackward());
+
+        dPadRight.whenPressed(new ClawForward());
+
     }
 
     /*
@@ -66,8 +98,5 @@ public class OperatingInterface {
         //rightStick = new JoystickButton(controller, RobotMap.RIGHT_STICK_NUMBER),
         //leftTrigger = new JoystickButton(controller, RobotMap.LEFT_TRIGGER),
         //rightTrigger = new JoystickButton(controller, RobotMap.RIGHT_TRIGGER);
-
-
-//bind to commands once there are commands to bind them to
 
 }

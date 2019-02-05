@@ -66,4 +66,11 @@ public class Drivetrain extends Subsystem {
     drivetrain.driveCartesian(x, y, z, 0.0);
   }
 
+  public static void stop() {
+    frontLeft.set(0.0);
+    frontRight.set(0.0);
+    backLeft.set(0.0);
+    backRight.set(0.0);
+  }
+
 }

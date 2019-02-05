@@ -6,6 +6,7 @@ package frc.robot.commands.manipulation.claw;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotState;
 
 public class ClawClose extends Command {
     public ClawClose() {
@@ -30,6 +31,7 @@ public class ClawClose extends Command {
     @Override
     protected void end() {
         Robot.grabSolenoid.off();
+        RobotState.isOpen = false;
     }
 
     @Override

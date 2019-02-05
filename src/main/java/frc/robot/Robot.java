@@ -8,6 +8,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
+import frc.robot.RobotState;
+import edu.wpi.first.wpilibj.Talon;
 
 public class Robot extends TimedRobot {
 
@@ -21,6 +23,7 @@ public class Robot extends TimedRobot {
   public static ClawGrab grabSolenoid;
   public static ClawMove moveSolenoid;
   public static ClawPush pushSolenoid;
+  public static Talon elevator;
 
   /*
   * Constructor
@@ -32,6 +35,15 @@ public class Robot extends TimedRobot {
     grabSolenoid = new ClawGrab();
     leftCamera = new Camera();
     rightCamera = new Camera();
+    elevator = new Talon(RobotMap.ELEVATOR_PORT);
+
+    // change these three to whatever the robot's starting position for these is when you know
+    RobotState.isExtended = false;
+    RobotState.isOpen = false;
+    RobotState.isPushed = false;
+    RobotState.elevatorLevel = 0;
+
+    Elevator.init();
   }
 
   /*

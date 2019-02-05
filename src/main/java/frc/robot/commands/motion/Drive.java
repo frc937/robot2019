@@ -32,10 +32,7 @@ public class Drive extends Command {
 
     @Override
     protected void end() {
-        Drivetrain.frontLeft.set(0.0);
-        Drivetrain.frontRight.set(0.0);
-        Drivetrain.backLeft.set(0.0);
-        Drivetrain.backRight.set(0.0);
+        Drivetrain.stop();
     }
 
     @Override

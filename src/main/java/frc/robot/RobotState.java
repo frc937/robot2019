@@ -10,10 +10,17 @@ public class RobotState {
     /*
     * Claw
     */
-    //grab variables
-    public boolean isOpen;
-    //push variables
-    public boolean isPushed;
-    //move variables
-    public boolean isExtended;
+    // grab variables
+    public static boolean isOpen;
+    // push variables
+    public static boolean isPushed;
+    // move variables
+    public static boolean isExtended;
+
+    /*
+    * Elevator
+    */
+    // set this to the level the elevator is at the end of the command to change level
+    public static byte elevatorLevel;
+
 }
