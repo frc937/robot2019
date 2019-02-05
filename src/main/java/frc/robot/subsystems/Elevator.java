@@ -52,4 +52,11 @@ public class Elevator extends Subsystem {
     protected void initDefaultCommand() {
     }
 
+    /*
+    * local methods
+    */
+    public void start() {
+        
+    }
+
 }
