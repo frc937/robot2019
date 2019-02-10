@@ -14,9 +14,9 @@ public class Drivetrain {
 
   //Declare variables
   private Talon frontLeft;
-  private Spark frontRight;
+  private Talon frontRight;
   private Talon backLeft;
-  private Spark backRight;
+  private Talon backRight;
 
   private MecanumDrive drivetrain;
 
@@ -29,12 +29,12 @@ public class Drivetrain {
   //constructor (run whenever the: = new Drivetrain() code is run)
   public Drivetrain(XboxController controller) {
     frontLeft = new Talon(Settings.frontLeftPort);
-    frontRight = new Spark(Settings.frontRightPort);
+    frontRight = new Talon(Settings.frontRightPort);
     backLeft = new Talon(Settings.backLeftPort);
-    backRight = new Spark(Settings.backRightPort);
+    backRight = new Talon(Settings.backRightPort);
 
-    frontLeft.setInverted(false);
-    backLeft.setInverted(false);
+    //frontLeft.setInverted(false);
+    //backLeft.setInverted(false); 
 
     drivetrain = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
@@ -45,15 +45,23 @@ public class Drivetrain {
     r = Math.hypot(controller.getX(Hand.kLeft), controller.getY(Hand.kLeft));
     robotAngle = Math.atan2(controller.getY(Hand.kLeft), controller.getX(Hand.kLeft)) - Math.PI / 4;
     rightX = controller.getX(Hand.kRight);
-    final double v1 = r * Math.cos(robotAngle) + rightX;
-    final double v2 = r * Math.sin(robotAngle) - rightX;
-    final double v3 = r * Math.sin(robotAngle) + rightX;
-    final double v4 = r * Math.cos(robotAngle) - rightX;
-
-    frontLeft.setSpeed(v1);
+    double v1 = r * Math.cos(robotAngle) + rightX;
+    double v2 = r * Math.sin(robotAngle) - rightX;
+    double v3 = r * Math.sin(robotAngle) + rightX;
+    double v4 = r * Math.cos(robotAngle) - rightX;
+    
+    double threshhold = 5000;
+    
+    if(Math.abs(v1) < threshhold) v1 = 0;
+    if(Math.abs(v2) < threshhold) v2 = 0;
+    if(Math.abs(v3) < threshhold) v3 = 0;
+    if(Math.abs(v4) < threshhold) v4 = 0;
+    
+    frontLeft.setSpeed(-v1);
     frontRight.setSpeed(v2);
-    backLeft.setSpeed(v3);
+    backLeft.setSpeed(-v3);
     backRight.setSpeed(v4);
+
     
     // Use the joystick X axis for lateral movement, Y axis for forward movement, and Z axis for rotation.
     //final double x = controller.getX(Hand.kLeft);
