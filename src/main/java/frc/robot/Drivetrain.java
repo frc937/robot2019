@@ -22,6 +22,14 @@ public class Drivetrain {
 
   private XboxController controller;
 
+  private double leftX;
+  private double leftY;
+  private double rightX;
+
+  private double x;
+  private double y;
+  private double z;
+
   //constructor (run whenever the: = new Drivetrain() code is run)
   public Drivetrain(XboxController controller) {
     frontLeft = new Talon(Settings.frontLeftPort);
@@ -29,8 +37,8 @@ public class Drivetrain {
     backLeft = new Talon(Settings.backLeftPort);
     backRight = new Spark(Settings.backRightPort);
 
-    frontLeft.setInverted(true);
-    backLeft.setInverted(true);
+    frontLeft.setInverted(false);
+    backLeft.setInverted(false);
 
     drivetrain = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
@@ -39,10 +47,13 @@ public class Drivetrain {
 
   public void driverControl() {
     // Use the joystick X axis for lateral movement, Y axis for forward movement, and Z axis for rotation.
-    final double x = controller.getX(Hand.kLeft);
-    final double y = controller.getY(Hand.kLeft);
-    final double z = controller.getX(Hand.kRight);
-
+    leftX = controller.getX(Hand.kLeft);
+    leftY = controller.getY(Hand.kLeft);
+    rightX  = controller.getX(Hand.kRight);
+    x = Math.signum(leftX) * Math.pow(leftX, 2);
+    y = Math.signum(leftY) * Math.pow(leftY, 2);
+    z = Math.signum(rightX) * Math.pow(rightX, 2);
+    
     drivetrain.driveCartesian(x, y, z, 0.0);
   }
 
