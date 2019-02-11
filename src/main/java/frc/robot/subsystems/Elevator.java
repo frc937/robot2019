@@ -56,8 +56,17 @@ public class Elevator extends Subsystem {
     /*
     * local methods
     */
-    public void start() {
-        
+    public void up() {
+        elevatorMotor.setSpeed(0.2);
+    }
+
+    public void down() {
+        elevatorMotor.setSpeed(-0.2);
+
+    }
+
+    public void stop() {
+        elevatorMotor.setSpeed(0.0);
     }
 
 }

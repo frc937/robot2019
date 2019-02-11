@@ -16,7 +16,7 @@ public class DriveRoboOriented extends Command {
     @Override
     protected void initialize() {
         setInterruptible(true);
-        SmartDashboard.putString("Drive Mode", "Mechanum Drive");
+        SmartDashboard.putString("Drive Mode", "Robot Oriented");
     }
 
     @Override

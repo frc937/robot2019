@@ -47,6 +47,7 @@ public class RobotMap {
   public static final int LEFT_STICK_NUMBER = 9;
   public static final int RIGHT_STICK_NUMBER = 10;
 
+  public static final int POV_NUMBER = 0;
   //public static final int DPAD_LEFT = controller.getPOV(270);
   //public static final int DPAD_RIGHT = controller.getPOV(90);
   //public static final int DPAD_UP = controller.getPOV(0);

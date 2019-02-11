@@ -30,10 +30,13 @@ public class OperatingInterface {
     private Button rightStick;
     private Button leftTrigger;
     private Button rightTrigger;
-    private Button dPadLeft;
-    private Button dPadRight;
-    private Button dPadUp;
-    private Button dPadDown;
+
+    private boolean dpadLeft;
+    private boolean dpadRight;
+    private boolean dpadUp;
+    private boolean dpadDown;
+    private double dpadX;
+    private double dpadY;
 
     private double leftXAxis;
     private double leftYAxis;
@@ -70,6 +73,54 @@ public class OperatingInterface {
         //dPadRight = new JoystickButton(controller, RobotMap.DPAD_RIGHT);
         //dPadUp = new JoystickButton(controller, RobotMap.DPAD_UP);
         //dPadDown = new JoystickButton(controller, RobotMap.DPAD_DOWN);
+
+        int dpadAngle = controller.getPOV(RobotMap.POV_NUMBER);
+        switch (dpadAngle) {
+            case 0:
+            dpadUp = true;
+            dpadX = 0;
+            dpadY = 1;
+            break;
+            case 45:
+            dpadUp = true;
+            dpadRight = true;
+            dpadX = 0.5;
+            dpadY = 0.5;
+            break;
+            case 90:
+            dpadRight = true;
+            dpadX = 1;
+            dpadY = 0;
+            break;
+            case 135:
+            dpadRight = true;
+            dpadDown = true;
+            dpadX = 0.5;
+            dpadY = -0.5;
+            break;
+            case 180:
+            dpadDown = true;
+            dpadX = 0;
+            dpadY = -1;
+            break;
+            case 225:
+            dpadDown = true;
+            dpadLeft = true;
+            dpadX = -0.05;
+            dpadY = -0.05;
+            break;
+            case 270:
+            dpadLeft = true;
+            dpadX = -1;
+            dpadY = 0;
+            break;
+            case 315:
+            dpadLeft = true;
+            dpadUp = true;
+            dpadX = -0.5;
+            dpadY = 0.5;
+            break;
+        }
 
 
         if(RobotState.isOpen = false) {
@@ -145,7 +196,6 @@ public class OperatingInterface {
     private double scaleAxis(double a) {
         return Math.signum(a) * Math.pow(a, 2);
     }
-
 
 
 
