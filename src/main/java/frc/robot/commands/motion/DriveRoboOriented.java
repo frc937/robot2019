@@ -5,12 +5,11 @@
 package frc.robot.commands.motion;
 
 import frc.robot.Robot;
-import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Drive extends Command {
-    public Drive() {
+public class DriveRoboOriented extends Command {
+    public DriveRoboOriented() {
         requires(Robot.drivetrain);
     }
 
@@ -22,17 +21,22 @@ public class Drive extends Command {
 
     @Override
     protected void execute() {
-        Drivetrain.driverControl();
+        Robot.drivetrain.move(
+            Robot.oi.getScaledLeftXAxis(), 
+            Robot.oi.getScaledLeftYAxis(), 
+            Robot.oi.getScaledRightXAxis()
+        );
     }
 
     @Override
     protected boolean isFinished() {
-        return isCanceled();
+        //return isCanceled();
+        return false;
     }
 
     @Override
     protected void end() {
-        Drivetrain.stop();
+        Robot.drivetrain.stop();
     }
 
     @Override

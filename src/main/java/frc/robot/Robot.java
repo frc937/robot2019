@@ -7,9 +7,12 @@ package frc.robot;
 //import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.*;
 import frc.robot.subsystems.*;
+import frc.robot.commands.motion.DriveRoboOriented;
 import frc.robot.RobotState;
-import edu.wpi.first.wpilibj.Talon;
+
 
 public class Robot extends TimedRobot {
 
@@ -23,19 +26,35 @@ public class Robot extends TimedRobot {
   public static ClawGrab grabSolenoid;
   public static ClawMove moveSolenoid;
   public static ClawPush pushSolenoid;
-  public static Talon elevator;
+  //public static Talon elevator;
+  public static Elevator elevator;
+
+  public static OperatingInterface oi;
+
+  private DriveRoboOriented drive;
+
 
   /*
   * Constructor
   */
   @Override
   public void robotInit() {
-    controller = new XboxController(RobotMap.CONTROLLER_NUMBER);
-    drivetrain = new Drivetrain(controller);
+    //controller = new XboxController(RobotMap.CONTROLLER_NUMBER);
+
+    drivetrain = new Drivetrain();
+
     grabSolenoid = new ClawGrab();
+    moveSolenoid = new ClawMove();
+    pushSolenoid = new ClawPush();
+
     leftCamera = new Camera();
     rightCamera = new Camera();
-    elevator = new Talon(RobotMap.ELEVATOR_PORT);
+
+    //elevator = new Talon(RobotMap.ELEVATOR_PORT);
+    elevator = new Elevator();
+
+    //oi = new OperatingInterface(controller);
+    oi = new OperatingInterface();
 
     // change these three to whatever the robot's starting position for these is when you know
     RobotState.isExtended = false;
@@ -44,6 +63,9 @@ public class Robot extends TimedRobot {
     RobotState.elevatorLevel = 0;
 
     Elevator.init();
+
+    drive = new DriveRoboOriented();
+
   }
 
   /*
@@ -51,7 +73,9 @@ public class Robot extends TimedRobot {
   */
   @Override
   public void teleopPeriodic() {
-    drivetrain.driverControl();
+    //drivetrain.driverControl();
     //grabSolenoid.update();
+
+    Scheduler.getInstance().run();
   }
 }

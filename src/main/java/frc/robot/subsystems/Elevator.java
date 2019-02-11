@@ -5,7 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.XboxController;
@@ -16,14 +16,15 @@ public class Elevator extends Subsystem {
     /*
     * variables
     */
-    private static Talon elevatorMotor;
+    private static Spark elevatorMotor;
     private static Encoder encoder;
 
     /*
     * constructor
     */
-    public Elevator(XboxController controller) {
-        elevatorMotor = new Talon(RobotMap.ELEVATOR_PORT);
+    //public Elevator(XboxController controller) {
+    public Elevator() {
+        elevatorMotor = new Spark(RobotMap.ELEVATOR_PORT);
         encoder = new Encoder(RobotMap.ENCODER_INPUT_1, RobotMap.ENCODER_INPUT_2);
     }
 

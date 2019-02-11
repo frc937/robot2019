@@ -21,6 +21,6 @@ public class RobotState {
     * Elevator
     */
     // set this to the level the elevator is at the end of the command to change level
-    public static byte elevatorLevel;
+    public static double elevatorLevel;
 
 }

@@ -19,29 +19,32 @@ public class Drivetrain extends Subsystem {
   * Declare variables
   */
   public static Talon frontLeft;
-  public static Spark frontRight;
+  public static Talon frontRight;
   public static Talon backLeft;
-  public static Spark backRight;
+  public static Talon backRight;
 
   private static MecanumDrive drivetrain;
 
-  private static XboxController controller;
+  //private XboxController controller;
 
   /*
   * constructor (run whenever the: = new Drivetrain() code is run)
   */
-  public Drivetrain(XboxController controller) {
+ // public Drivetrain(XboxController controller) {
+  public Drivetrain() {
     frontLeft = new Talon(RobotMap.FRONT_LEFT_PORT);
-    frontRight = new Spark(RobotMap.FRONT_RIGHT_PORT);
+    frontRight = new Talon(RobotMap.FRONT_RIGHT_PORT);
     backLeft = new Talon(RobotMap.BACK_LEFT_PORT);
-    backRight = new Spark(RobotMap.BACK_RIGHT_PORT);
+    backRight = new Talon(RobotMap.BACK_RIGHT_PORT);
 
-    frontLeft.setInverted(true);
-    backLeft.setInverted(true);
+    frontLeft.setInverted(false);
+    frontRight.setInverted(false);
+    backLeft.setInverted(false);
+    backRight.setInverted(false);
 
     drivetrain = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
-    this.controller = controller;
+    //this.controller = controller;
   }
 
   /*
@@ -50,23 +53,22 @@ public class Drivetrain extends Subsystem {
   // default command is drive command
   @Override
   protected void initDefaultCommand() {
-    setDefaultCommand(new Drive());
-
+    setDefaultCommand(new DriveRoboOriented());
   }
 
   /*
   * local methods
   */
-  public static void driverControl() {
-    // Use the joystick X axis for lateral movement, Y axis for forward movement, and Z axis for rotation.
-    final double x = controller.getX(Hand.kLeft);
-    final double y = controller.getY(Hand.kLeft);
-    final double z = controller.getX(Hand.kRight);
-
-    drivetrain.driveCartesian(x, y, z, 0.0);
+  
+  public void move(double x, double y, double z) {
+    drivetrain.driveCartesian(x, y, z);
   }
 
-  public static void stop() {
+  public void moveRelative(double x, double y, double z, double gyro) {
+    drivetrain.driveCartesian(x, y, z, gyro);
+  }
+
+  public void stop() {
     frontLeft.set(0.0);
     frontRight.set(0.0);
     backLeft.set(0.0);

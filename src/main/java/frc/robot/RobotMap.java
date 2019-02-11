@@ -11,10 +11,10 @@ public class RobotMap {
   private static XboxController controller;
 
   //drive motors
-  public static final int FRONT_LEFT_PORT  = 0;
-  public static final int FRONT_RIGHT_PORT = 1;
-  public static final int BACK_LEFT_PORT   = 2;
-  public static final int BACK_RIGHT_PORT  = 3;
+  public static final int FRONT_LEFT_PORT  = 2;
+  public static final int FRONT_RIGHT_PORT = 3;
+  public static final int BACK_LEFT_PORT   = 0;
+  public static final int BACK_RIGHT_PORT  = 1;
 
   //elevator motor
   public static final int ELEVATOR_PORT = 4;
@@ -47,10 +47,10 @@ public class RobotMap {
   public static final int LEFT_STICK_NUMBER = 9;
   public static final int RIGHT_STICK_NUMBER = 10;
 
-  public static final int DPAD_LEFT = controller.getPOV(270);
-  public static final int DPAD_RIGHT = controller.getPOV(90);
-  public static final int DPAD_UP = controller.getPOV(0);
-  public static final int DPAD_DOWN = controller.getPOV(180);
+  //public static final int DPAD_LEFT = controller.getPOV(270);
+  //public static final int DPAD_RIGHT = controller.getPOV(90);
+  //public static final int DPAD_UP = controller.getPOV(0);
+  //public static final int DPAD_DOWN = controller.getPOV(180);
 
   public static final int LEFT_X_AXIS = 0;
   public static final int LEFT_Y_AXIS = 1;
