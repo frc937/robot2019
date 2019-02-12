@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.RobotState;
 import frc.robot.commands.manipulation.claw.*;
+import frc.robot.commands.manipulation.elevator.*;
 
 public class OperatingInterface {
 
@@ -120,6 +121,10 @@ public class OperatingInterface {
             dpadX = -0.5;
             dpadY = 0.5;
             break;
+            default:
+            dpadX = 0;
+            dpadY = 0;
+            break;
         }
 
 
@@ -142,6 +147,22 @@ public class OperatingInterface {
         //dPadLeft.whenPressed(new ClawBackward());
 
         //dPadRight.whenPressed(new ClawForward());
+
+        while(dpadAngle == 0) {
+            new Lift();
+        }
+
+        while(dpadAngle == 180) {
+            new Lower();
+        }
+
+        if(dpadAngle == 270) {
+            new ClawUp();
+        }
+
+        if(dpadAngle == 90) {
+            new ClawDown();
+        }
 
     }
 
@@ -194,7 +215,7 @@ public class OperatingInterface {
 
 
     private double scaleAxis(double a) {
-        return Math.signum(a) * Math.pow(a, 2);
+        return Math.signum(a) * Math.pow(a, 4);
     }
 
 

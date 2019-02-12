@@ -10,8 +10,28 @@ public class Lift extends Command {
     }
 
     @Override
+    protected void initialize() {
+        setInterruptible(true);
+    }
+
+    @Override
+    protected void execute() {
+        Elevator.up();
+    }
+
+    @Override
     protected boolean isFinished() {
-        return false;
+        return isCanceled();
+    }
+
+    @Override
+    protected void end() {
+        Elevator.stop();
+    }
+
+    @Override
+    protected void interrupted() {
+        end();
     }
 
 }

@@ -16,7 +16,7 @@ public class PushOut extends Command {
 
     @Override
     protected void initialize() {
-        Robot.moveSolenoid.forward();
+        Robot.pushSolenoid.forward();
     }
     
     @Override

@@ -1,5 +1,5 @@
-/*
-* Command for entire claw to move backward
+/* 
+* Command for entire claw to move forward
 */
 
 package frc.robot.commands.manipulation.claw;
@@ -8,15 +8,15 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotState;
 
-public class ClawBackward extends Command {
-    public ClawBackward() {
+public class ClawUp extends Command {
+    public ClawUp() {
         requires(Robot.moveSolenoid);
         setTimeout(0.9);
     }
 
     @Override
     protected void initialize() {
-        Robot.moveSolenoid.backward();
+        Robot.moveSolenoid.up();
     }
     
     @Override
@@ -31,7 +31,7 @@ public class ClawBackward extends Command {
     @Override
     protected void end() {
         Robot.moveSolenoid.off();
-        RobotState.isExtended = false;
+        RobotState.isExtended = true;
     }
 
     @Override

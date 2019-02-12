@@ -56,16 +56,16 @@ public class Elevator extends Subsystem {
     /*
     * local methods
     */
-    public void up() {
-        elevatorMotor.setSpeed(0.2);
+    public static void up() {
+        elevatorMotor.setSpeed(0.1);
     }
 
-    public void down() {
-        elevatorMotor.setSpeed(-0.2);
+    public static void down() {
+        elevatorMotor.setSpeed(-0.1);
 
     }
 
-    public void stop() {
+    public static void stop() {
         elevatorMotor.setSpeed(0.0);
     }
 

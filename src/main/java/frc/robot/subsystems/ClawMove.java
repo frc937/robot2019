@@ -1,5 +1,5 @@
 /*
-* Code for entire claw to move back and forth
+* Code for entire claw to move up and down
 */
 
 package frc.robot.subsystems;
@@ -33,11 +33,11 @@ public class ClawMove extends Subsystem {
     /*
     * local methods
     */
-    public void forward() {
+    public void up() {
         moveSolenoid.set(Value.kForward);
     }
 
-    public void backward() {
+    public void down() {
         moveSolenoid.set(Value.kReverse);
     }
 

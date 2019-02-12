@@ -16,7 +16,7 @@ public class PushIn extends Command {
 
     @Override
     protected void initialize() {
-        Robot.moveSolenoid.backward();
+        Robot.pushSolenoid.backward();
     }
     
     @Override
