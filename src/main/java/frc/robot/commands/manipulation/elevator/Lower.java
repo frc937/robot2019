@@ -21,7 +21,7 @@ public class Lower extends Command {
 
     @Override
     protected boolean isFinished() {
-        return isCanceled();
+        return false;
     }
 
     @Override

@@ -31,7 +31,7 @@ public class ClawUp extends Command {
     @Override
     protected void end() {
         Robot.moveSolenoid.off();
-        RobotState.isExtended = true;
+        RobotState.isUp = true;
     }
 
     @Override

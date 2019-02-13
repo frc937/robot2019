@@ -34,11 +34,11 @@ public class ClawMove extends Subsystem {
     * local methods
     */
     public void up() {
-        moveSolenoid.set(Value.kForward);
+        moveSolenoid.set(Value.kReverse);
     }
 
     public void down() {
-        moveSolenoid.set(Value.kReverse);
+        moveSolenoid.set(Value.kForward);
     }
 
     public void off() {

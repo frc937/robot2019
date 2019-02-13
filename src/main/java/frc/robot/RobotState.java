@@ -15,7 +15,7 @@ public class RobotState {
     // push variables
     public static boolean isPushed;
     // move variables
-    public static boolean isExtended;
+    public static boolean isUp;
 
     /*
     * Elevator
