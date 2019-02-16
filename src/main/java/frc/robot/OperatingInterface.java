@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.POVButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.RobotState;
 import frc.robot.commands.manipulation.claw.*;
@@ -32,12 +33,12 @@ public class OperatingInterface {
     private Button leftTrigger;
     private Button rightTrigger;
 
-    private boolean dpadLeft;
-    private boolean dpadRight;
-    private boolean dpadUp;
-    private boolean dpadDown;
-    private double dpadX;
-    private double dpadY;
+    private POVButton dpadLeft;
+    private POVButton dpadRight;
+    private POVButton dpadUp;
+    private POVButton dpadDown;
+    //private POVButton dpadX;
+    //private POVButton dpadY;
 
     private double leftXAxis;
     private double leftYAxis;
@@ -74,59 +75,65 @@ public class OperatingInterface {
         //dPadRight = new JoystickButton(controller, RobotMap.DPAD_RIGHT);
         //dPadUp = new JoystickButton(controller, RobotMap.DPAD_UP);
         //dPadDown = new JoystickButton(controller, RobotMap.DPAD_DOWN);
+        dpadUp = new POVButton(controller, 0);
+        dpadRight = new POVButton(controller, 90);
+        dpadDown = new POVButton(controller, 180);
+        dpadLeft = new POVButton(controller, 270);
 
+        /*
         int dpadAngle = controller.getPOV(RobotMap.POV_NUMBER);
         switch (dpadAngle) {
             case 0:
-            dpadUp = true;
-            dpadX = 0;
-            dpadY = 1;
-            break;
+                new Lift();
+                //dpadUp = true;
+                //dpadX = 0;
+                //dpadY = 1;
+                break;
             case 45:
-            dpadUp = true;
-            dpadRight = true;
-            dpadX = 0.5;
-            dpadY = 0.5;
-            break;
+                dpadUp = true;
+                dpadRight = true;
+                dpadX = 0.5;
+                dpadY = 0.5;
+                break;
             case 90:
-            dpadRight = true;
-            dpadX = 1;
-            dpadY = 0;
-            break;
+                dpadRight = true;
+                dpadX = 1;
+                dpadY = 0;
+                break;
             case 135:
-            dpadRight = true;
-            dpadDown = true;
-            dpadX = 0.5;
-            dpadY = -0.5;
-            break;
+                dpadRight = true;
+                dpadDown = true;
+                dpadX = 0.5;
+                dpadY = -0.5;
+                break;
             case 180:
-            dpadDown = true;
-            dpadX = 0;
-            dpadY = -1;
-            break;
+                dpadDown = true;
+                dpadX = 0;
+                dpadY = -1;
+                break;
             case 225:
-            dpadDown = true;
-            dpadLeft = true;
-            dpadX = -0.05;
-            dpadY = -0.05;
-            break;
+                dpadDown = true;
+                dpadLeft = true;
+                dpadX = -0.05;
+                dpadY = -0.05;
+                break;
             case 270:
-            dpadLeft = true;
-            dpadX = -1;
-            dpadY = 0;
-            break;
+                dpadLeft = true;
+                dpadX = -1;
+                dpadY = 0;
+                break;
             case 315:
-            dpadLeft = true;
-            dpadUp = true;
-            dpadX = -0.5;
-            dpadY = 0.5;
-            break;
+                dpadLeft = true;
+                dpadUp = true;
+                dpadX = -0.5;
+                dpadY = 0.5;
+                break;
             default:
-            dpadX = 0;
-            dpadY = 0;
-            break;
+                dpadX = 0;
+                dpadY = 0;
+                break;
         }
-
+        */
 
         if(RobotState.isOpen = false) {
             leftBumper.whenPressed(new ClawOpen());
@@ -144,10 +151,12 @@ public class OperatingInterface {
             rightBumper.whenPressed(new PushIn());
         }
 
-        //dPadLeft.whenPressed(new ClawBackward());
+        dpadLeft.whenPressed(new ClawUp());
+        dpadRight.whenPressed(new ClawDown());
+        dpadUp.whileHeld(new Lift());
+        dpadDown.whileHeld(new Lower());
 
-        //dPadRight.whenPressed(new ClawForward());
-
+        /*
         while(dpadAngle == 0) {
             new Lift();
         }
@@ -163,7 +172,7 @@ public class OperatingInterface {
         if(dpadAngle == 90) {
             new ClawDown();
         }
-
+        */
     }
 
     public void stickValues() {

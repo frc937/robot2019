@@ -31,7 +31,7 @@ public class ClawDown extends Command {
     @Override
     protected void end() {
         Robot.moveSolenoid.off();
-        RobotState.isExtended = false;
+        RobotState.isUp = false;
     }
 
     @Override

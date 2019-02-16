@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.*;
 import frc.robot.subsystems.*;
 import frc.robot.commands.motion.DriveRoboOriented;
 import frc.robot.RobotState;
+import frc.robot.commands.manipulation.elevator.*;
 
 
 public class Robot extends TimedRobot {
@@ -32,6 +33,8 @@ public class Robot extends TimedRobot {
   public static OperatingInterface oi;
 
   private DriveRoboOriented drive;
+  private Lift lift;
+  private Lower lower;
 
 
   /*
@@ -57,7 +60,7 @@ public class Robot extends TimedRobot {
     oi = new OperatingInterface();
 
     // change these three to whatever the robot's starting position for these is when you know
-    RobotState.isExtended = false;
+    RobotState.isUp = true;
     RobotState.isOpen = false;
     RobotState.isPushed = false;
     RobotState.elevatorLevel = 0;
@@ -65,6 +68,8 @@ public class Robot extends TimedRobot {
     Elevator.init();
 
     drive = new DriveRoboOriented();
+    //lift = new Lift();
+    //lower = new Lower();
 
   }
 
