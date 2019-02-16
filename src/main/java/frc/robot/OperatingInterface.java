@@ -153,8 +153,8 @@ public class OperatingInterface {
 
         dpadLeft.whenPressed(new ClawUp());
         dpadRight.whenPressed(new ClawDown());
-        dpadUp.whileActive(new Lift());
-        dpadDown.whileActive(new Lower());
+        dpadUp.whileHeld(new Lift());
+        dpadDown.whileHeld(new Lower());
 
         /*
         while(dpadAngle == 0) {
