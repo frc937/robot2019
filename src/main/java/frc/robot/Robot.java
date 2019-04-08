@@ -1,68 +1,133 @@
+/*
+ * Main loops and methods for the robot
+ */
+
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Spark;
+//import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.command.Scheduler;
+//import edu.wpi.first.wpilibj.command.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import frc.robot.subsystems.*;
+import frc.robot.commands.motion.DriveRoboOriented;
+//import frc.robot.RobotState;
+import frc.robot.commands.manipulation.elevator.*;
+
 
 public class Robot extends TimedRobot {
-  private static final int kFrontLeftChannel = 2;
-  private static final int kRearLeftChannel = 3;
-  private static final int kFrontRightChannel = 1;
-  private static final int kRearRightChannel = 0;
 
-  private static final int kJoystickChannel = 0;
+  /*
+  * Declare variables
+  */
+  public static XboxController controller;
+  public static Drivetrain drivetrain;
+  private Camera leftCamera;
+  private Camera rightCamera;
+  public static ClawGrab grabSolenoid;
+  public static ClawMove moveSolenoid;
+  public static ClawPush pushSolenoid;
 
-  private MecanumDrive m_robotDrive;
-  private Joystick m_stick;
+  //solenoids
+
+  //private DoubleSolenoid grabSolenoid = new DoubleSolenoid(RobotMap.CLAW_GRAB_OUT_PORT, RobotMap.CLAW_GRAB_IN_PORT);
+
+  //private DoubleSolenoid moveSolenoid = new DoubleSolenoid(RobotMap.CLAW_MOVE_OUT_PORT, RobotMap.CLAW_MOVE_IN_PORT);
+
+  //private DoubleSolenoid pushSolenoid = new DoubleSolenoid(RobotMap.CLAW_PUSH_OUT_PORT, RobotMap.CLAW_PUSH_IN_PORT);
 
 
-  Talon frontLeft;
-  Talon rearLeft;
-  Spark frontRight;
-  Spark rearRight;
 
-  DoubleSolenoid solenoid;
 
+  //public static Talon elevator;
+  public static Elevator elevator;
+
+  public static OperatingInterface oi;
+
+  private DriveRoboOriented drive;
+  private Lift lift;
+  private Lower lower;
+
+
+  /*
+  * Constructor
+  */
   @Override
   public void robotInit() {
-    CameraServer.getInstance().startAutomaticCapture();
-    CameraServer.getInstance().startAutomaticCapture();
+    controller = new XboxController(RobotMap.CONTROLLER_NUMBER);
 
-    frontLeft = new Talon(kFrontLeftChannel);
-    rearLeft = new Talon(kRearLeftChannel);
-    frontRight = new Spark(kFrontRightChannel);
-    rearRight = new Spark(kRearRightChannel);
+    drivetrain = new Drivetrain();
 
-    solenoid = new DoubleSolenoid(0, 1);
+    grabSolenoid = new ClawGrab();
+    moveSolenoid = new ClawMove();
+    pushSolenoid = new ClawPush();
 
-    // Invert the left side motors.
-    // You may need to change or remove this to match your robot.
-    frontLeft.setInverted(true);
-    rearLeft.setInverted(true);
+    leftCamera = new Camera();
+    rightCamera = new Camera();
 
-    m_robotDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
+    //elevator = new Talon(RobotMap.ELEVATOR_PORT);
+    elevator = new Elevator();
 
-    m_stick = new Joystick(kJoystickChannel);
-    m_stick.setZChannel(4);
+    //oi = new OperatingInterface(controller);
+    oi = new OperatingInterface();
+
+    // change these three to whatever the robot's starting position for these is when you know
+    /*RobotState.isUp = true;
+    RobotState.isOpen = false;
+    RobotState.isPushed = false;
+    RobotState.elevatorLevel = 0;
+*/
+    Elevator.init();
+
+    drive = new DriveRoboOriented();
+    //lift = new Lift();
+    //lower = new Lower();
+
   }
 
   @Override
-  public void teleopPeriodic() {
-    // Use the joystick X axis for lateral movement, Y axis for forward
-    // movement, and Z axis for rotation.
-    m_robotDrive.driveCartesian(m_stick.getX(), m_stick.getY(), m_stick.getZ(), 0.0);
+  public void autonomousPeriodic() {
+    Scheduler.getInstance().run();
 
-    if(m_stick.getRawButton(1)) {
-      solenoid.set(DoubleSolenoid.Value.kForward);
-    } else if(m_stick.getRawButton(2)) {
-      solenoid.set(DoubleSolenoid.Value.kReverse);
+  }
+  /*
+  * Interface methods
+  */
+  @Override
+  public void teleopPeriodic() {
+    //drivetrain.driverControl();
+    //grabSolenoid.update();
+/*
+    //grabber control
+    if(controller.getBumper(Hand.kLeft)) {
+      grabSolenoid.set(Value.kForward);
+    } else if(controller.getBumper(Hand.kRight)) {
+      grabSolenoid.set(Value.kReverse);
     } else {
-      solenoid.set(DoubleSolenoid.Value.kOff);
+      grabSolenoid.set(Value.kOff);
     }
 
+    //MOVEer control
+    if(controller.getPOV(0) == 270) {
+      moveSolenoid.set(Value.kForward);
+    } else if(controller.getPOV(0) == 90) {
+      moveSolenoid.set(Value.kReverse);
+    } else {
+      moveSolenoid.set(Value.kOff);
+    }
+
+    //grabber control
+    if(controller.getAButton()) {
+      pushSolenoid.set(Value.kForward);
+    } else if(controller.getBButton()) {
+      pushSolenoid.set(Value.kReverse);
+    } else {
+      pushSolenoid.set(Value.kOff);
+    }
+*/
+    Scheduler.getInstance().run();
   }
 }
