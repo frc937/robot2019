@@ -17,6 +17,7 @@ public class ClawOpen extends Command {
     @Override
     protected void initialize() {
         Robot.grabSolenoid.open();
+        System.out.println("clawopen");
     }
 
     @Override
@@ -30,7 +31,7 @@ public class ClawOpen extends Command {
 
     @Override
     protected void end() {
-        Robot.grabSolenoid.off();
+        //Robot.grabSolenoid.off();
         RobotState.isOpen = true;
     }
 

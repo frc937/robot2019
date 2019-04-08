@@ -135,6 +135,7 @@ public class OperatingInterface {
         }
         */
 
+        /*
         if(RobotState.isOpen = false) {
             leftBumper.whenPressed(new ClawOpen());
         }
@@ -150,10 +151,15 @@ public class OperatingInterface {
         if(RobotState.isPushed = true) {
             rightBumper.whenPressed(new PushIn());
         }
-
+        */
+        leftBumper.whenPressed(new ClawOpen());
+        rightBumper.whenPressed(new ClawClose());
+        aButton.whenPressed(new PushOut());
+        bButton.whenPressed(new PushIn());
         dpadLeft.whenPressed(new ClawUp());
         dpadRight.whenPressed(new ClawDown());
-        dpadUp.whileHeld(new Lift());
+        
+       dpadUp.whileHeld(new Lift());
         dpadDown.whileHeld(new Lower());
 
         /*

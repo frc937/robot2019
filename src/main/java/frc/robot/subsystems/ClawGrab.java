@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.*;
 
 
-public class ClawGrab extends Subsystem { 
+public class 
+ClawGrab extends Subsystem { 
 
   /*
   * variables
@@ -22,6 +23,7 @@ public class ClawGrab extends Subsystem {
   */
   public ClawGrab() {
     grabSolenoid = new DoubleSolenoid(RobotMap.CLAW_GRAB_OUT_PORT, RobotMap.CLAW_GRAB_IN_PORT);
+    close();
   }
 
   /*
@@ -35,11 +37,13 @@ public class ClawGrab extends Subsystem {
   * local methods
   */
   public void open() {
-    grabSolenoid.set(Value.kForward);
+    System.out.println("open");
+    grabSolenoid.set(Value.kReverse);
   }
 
   public void close() {
-    grabSolenoid.set(Value.kReverse);
+    System.out.println("close");
+    grabSolenoid.set(Value.kForward);
   }
 
   public void off() {

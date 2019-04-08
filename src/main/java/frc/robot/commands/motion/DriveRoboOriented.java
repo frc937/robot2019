@@ -22,7 +22,7 @@ public class DriveRoboOriented extends Command {
     @Override
     protected void execute() {
         Robot.drivetrain.move(
-            Robot.oi.getScaledLeftXAxis(), 
+            -Robot.oi.getScaledLeftXAxis(), 
             Robot.oi.getScaledLeftYAxis(), 
             Robot.oi.getScaledRightXAxis()
         );

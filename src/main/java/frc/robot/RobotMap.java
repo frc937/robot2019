@@ -17,7 +17,8 @@ public class RobotMap {
   public static final int BACK_RIGHT_PORT  = 1;
 
   //elevator motor
-  public static final int ELEVATOR_PORT = 4;
+  public static final int ELEVATOR1_PORT = 4;
+  public static final int ELEVATOR2_PORT = 5;
 
   //encoder inputs
   public static final int ENCODER_INPUT_1 = 0;

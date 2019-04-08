@@ -21,6 +21,7 @@ public class ClawMove extends Subsystem {
     */
     public ClawMove() {
         moveSolenoid = new DoubleSolenoid(RobotMap.CLAW_MOVE_OUT_PORT, RobotMap.CLAW_MOVE_IN_PORT);
+        up();
     }
 
     /*
@@ -33,11 +34,13 @@ public class ClawMove extends Subsystem {
     /*
     * local methods
     */
-    public void up() {
+    public void down() {
+        System.out.println("movedown");
         moveSolenoid.set(Value.kReverse);
     }
 
-    public void down() {
+    public void up() {
+        System.out.println("moveup");
         moveSolenoid.set(Value.kForward);
     }
 

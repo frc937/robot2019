@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Elevator extends Subsystem {
@@ -16,7 +15,8 @@ public class Elevator extends Subsystem {
     /*
     * variables
     */
-    private static Talon elevatorMotor;
+    private static Talon elevatorMotor1;
+    private static Talon elevatorMotor2;
     private static Encoder encoder;
 
     /*
@@ -24,7 +24,8 @@ public class Elevator extends Subsystem {
     */
     //public Elevator(XboxController controller) {
     public Elevator() {
-        elevatorMotor = new Talon(RobotMap.ELEVATOR_PORT);
+        elevatorMotor1 = new Talon(RobotMap.ELEVATOR1_PORT);
+        elevatorMotor2 = new Talon(RobotMap.ELEVATOR2_PORT);
         encoder = new Encoder(RobotMap.ENCODER_INPUT_1, RobotMap.ENCODER_INPUT_2);
     }
 
@@ -44,7 +45,8 @@ public class Elevator extends Subsystem {
     }
 
     public static void init() {
-        elevatorMotor.setInverted(false);
+        elevatorMotor1.setInverted(false);
+        elevatorMotor2.setInverted(false);
         encoder.setDistancePerPulse(RobotMap.DISTANCE_PER_PULSE);
         encoder.setReverseDirection(false);
     }
@@ -56,17 +58,19 @@ public class Elevator extends Subsystem {
     /*
     * local methods
     */
-    public static void up() {
-        elevatorMotor.setSpeed(0.3);
+    public static void down() {
+        elevatorMotor1.setSpeed(0.45);
+        elevatorMotor2.setSpeed(0.45);
     }
 
-    public static void down() {
-        elevatorMotor.setSpeed(-0.3);
-
+    public static void up() {
+        elevatorMotor1.setSpeed(-0.45);
+        elevatorMotor2.setSpeed(-0.45);
     }
 
     public static void stop() {
-        elevatorMotor.setSpeed(0.0);
+        elevatorMotor1.setSpeed(0.0);
+        elevatorMotor2.setSpeed(0.0);
     }
 
 }

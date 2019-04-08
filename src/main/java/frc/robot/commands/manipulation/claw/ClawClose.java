@@ -17,6 +17,7 @@ public class ClawClose extends Command {
     @Override
     protected void initialize() {
         Robot.grabSolenoid.close();
+        System.out.println("clawclose");
     }
     
     @Override
@@ -25,12 +26,12 @@ public class ClawClose extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     @Override
     protected void end() {
-        Robot.grabSolenoid.off();
+        //Robot.grabSolenoid.off();
         RobotState.isOpen = false;
     }
 

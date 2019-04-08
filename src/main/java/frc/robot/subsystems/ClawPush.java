@@ -21,6 +21,7 @@ public class ClawPush extends Subsystem {
     */
     public ClawPush() {
         pushSolenoid = new DoubleSolenoid(RobotMap.CLAW_PUSH_OUT_PORT, RobotMap.CLAW_PUSH_IN_PORT);
+        backward();
     }
 
     /*
@@ -34,10 +35,12 @@ public class ClawPush extends Subsystem {
     * local methods
     */
     public void forward() {
+        System.out.println("pushforward");
         pushSolenoid.set(Value.kForward);
     }
 
     public void backward() {
+        System.out.println("pushback");
         pushSolenoid.set(Value.kReverse);
     }
 

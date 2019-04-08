@@ -17,6 +17,7 @@ public class PushIn extends Command {
     @Override
     protected void initialize() {
         Robot.pushSolenoid.backward();
+        System.out.println("pushin");
     }
     
     @Override
@@ -30,7 +31,7 @@ public class PushIn extends Command {
 
     @Override
     protected void end() {
-        Robot.moveSolenoid.off();
+        //Robot.pushSolenoid.off();
         RobotState.isPushed = false;
     }
 
