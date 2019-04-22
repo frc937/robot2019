@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -25,12 +24,10 @@ public class Drivetrain extends Subsystem {
 
   private static MecanumDrive drivetrain;
 
-  //private XboxController controller;
 
   /*
   * constructor (run whenever the: = new Drivetrain() code is run)
   */
- // public Drivetrain(XboxController controller) {
   public Drivetrain() {
     frontLeft = new Talon(RobotMap.FRONT_LEFT_PORT);
     frontRight = new Talon(RobotMap.FRONT_RIGHT_PORT);
@@ -44,7 +41,6 @@ public class Drivetrain extends Subsystem {
 
     drivetrain = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
-    //this.controller = controller;
   }
 
   /*

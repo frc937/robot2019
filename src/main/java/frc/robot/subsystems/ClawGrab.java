@@ -1,4 +1,4 @@
- /*
+/*
  * Code for claw to grab things
  */
 
@@ -50,14 +50,4 @@ ClawGrab extends Subsystem {
     grabSolenoid.set(Value.kOff);
   }
 
-  // old but don't want to delete
-  //public void update() {
-    //if(controller.getAButton()) {
-      //grabSolenoid.set(DoubleSolenoid.Value.kForward);
-    //} else if(controller.getBButton()) {
-      //grabSolenoid.set(DoubleSolenoid.Value.kReverse);
-    //} else {
-      //grabSolenoid.set(DoubleSolenoid.Value.kOff);
-    //}
-  //}
 }

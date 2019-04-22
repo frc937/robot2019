@@ -31,7 +31,6 @@ public class ClawClose extends Command {
 
     @Override
     protected void end() {
-        //Robot.grabSolenoid.off();
         RobotState.isOpen = false;
     }
 

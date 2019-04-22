@@ -31,7 +31,6 @@ public class ClawDown extends Command {
 
     @Override
     protected void end() {
-        //Robot.moveSolenoid.off();
         RobotState.isUp = false;
     }
 
@@ -39,4 +38,4 @@ public class ClawDown extends Command {
     protected void interrupted() {
         end();
     }
-}
+} 

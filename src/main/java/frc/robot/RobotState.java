@@ -1,6 +1,7 @@
 /*
 * Class to store toggled boolean variables so we can
 * have the same button open and close a thing
+* Update: this didn't work but I'm keeping it around because I like the idea and will get it to work.
 */
 
 package frc.robot;
