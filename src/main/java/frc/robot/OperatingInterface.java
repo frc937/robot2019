@@ -83,6 +83,9 @@ public class OperatingInterface {
 
     }
 
+    /*
+    * methods
+    */
     public void stickValues() {
         leftXAxis = controller.getX(Hand.kLeft);
         leftYAxis = controller.getY(Hand.kLeft);

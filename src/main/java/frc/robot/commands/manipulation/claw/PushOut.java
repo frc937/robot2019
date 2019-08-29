@@ -9,6 +9,9 @@ import frc.robot.Robot;
 import frc.robot.RobotState;
 
 public class PushOut extends Command {
+    /*
+    * Constructor
+    */
     public PushOut() {
         requires(Robot.moveSolenoid);
         setTimeout(0.9);

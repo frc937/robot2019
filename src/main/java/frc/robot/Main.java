@@ -1,3 +1,7 @@
+/*
+* To spare you all the jargon...
+* Please just don't change anything in here or you'll f it all up
+*/
 package frc.robot;
 
 import edu.wpi.first.wpilibj.RobotBase;
