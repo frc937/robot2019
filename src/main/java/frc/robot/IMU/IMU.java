@@ -22,7 +22,7 @@ import frc.robot.IMU.Vector3D;
 class IMU {
 
     //variables
-    private Vector3D displacement, velocity;
+    private Vector3D displacement, velocity, acceleration;
     protected AHRS ahrs;
 
     /**
@@ -31,6 +31,8 @@ class IMU {
      */
     public IMU() {
         ahrs = new AHRS();
+        displacement = new Vector3D();
+        velocity = new Vector3D();
     }
 
     /**
@@ -68,6 +70,46 @@ class IMU {
         double z = a[0]*b[3] + a[1]*b[2] - a[2]*b[1] + a[3]*b[1];
         
         return new double[] {w, x, y, z};
+    }
+
+    /**
+     * Turns a vector in the context of the robot into
+     * a vector in the context of the world. This only
+     * changes the direction, you still have to use the
+     * position vectors to put it on a grid.
+     * <p>
+     * Most data on the robot changes where it is from
+     * depending on where the robot is at the time it
+     * takes a measurement. This takes a value like
+     * 3 meters from the front of the robot, and gives
+     * that a correct x,y,z value in the world
+     * @param vector 3D local vector to transform
+     * @return 3D world vector
+     */
+    public Vector3D l2wTransform(Vector3D vector) {
+        
+        //grab vector components
+        double[] p = new double[] {
+            0,
+            vector.getX(),
+            vector.getY(),
+            vector.getZ()
+        };
+
+        //grab quaternion components
+        double w = ahrs.getQuaternionW();
+        double x = ahrs.getQuaternionX();
+        double y = ahrs.getQuaternionY();
+        double z = ahrs.getQuaternionZ();
+        
+        double[] r = new double[] {w, x, y, z};
+        double[] R = new double[] {w, -x, -y, -z};
+        
+        //take hamilton products
+        double[] P = hamiltonProduct(r, p);
+        P = hamiltonProduct(P, R);
+
+        return new Vector3D(P[1], P[2], P[3]);
     }
 
     /**
