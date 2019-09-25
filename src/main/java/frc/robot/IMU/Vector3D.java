@@ -27,7 +27,7 @@ class Vector3D {
      * @param that other vector to copy
      */
     public Vector3D(Vector3D that) {
-        this();
+        this(that.getX(), that.getY(), that.getZ());
     }
 
     /**
