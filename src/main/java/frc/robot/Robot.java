@@ -29,13 +29,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.robot.subsystems.*;
 import frc.robot.commands.motion.DriveRoboOriented;
-import frc.robot.commands.manipulation.elevator.*;
 
 
 public class Robot extends TimedRobot {
