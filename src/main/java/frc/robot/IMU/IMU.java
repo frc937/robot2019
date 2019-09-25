@@ -22,7 +22,6 @@ import frc.robot.IMU.Vector3D;
 class IMU {
 
     //variables
-    private Vector3D displacement, velocity, acceleration;
     protected AHRS ahrs;
 
     /**
@@ -33,9 +32,6 @@ class IMU {
         ahrs.resetDisplacement();
         ahrs.enableBoardlevelYawReset(true);
         ahrs.zeroYaw();
-
-        displacement = new Vector3D();
-        velocity = new Vector3D();
     }
 
     /**
