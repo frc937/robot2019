@@ -16,7 +16,7 @@ import frc.robot.IMU.Vector3D;
  * math so you don't have to.
  * <p>
  * You can assume that any value you get from
- * here is not perfectly accurate, but pretty
+ * here is not very accurate, but acceptably
  * close. All of the units are metric.
  */
 class IMU {
@@ -41,6 +41,15 @@ class IMU {
      */
     public void update() {
 
+    }
+
+    /**
+     * @return A vector of the robot's acceleration in
+     *         the world.
+     */
+    public Vector3D getAccel() {
+        
+        return new Vector3D();
     }
 
     /**
@@ -70,55 +79,6 @@ class IMU {
         double z = a[0]*b[3] + a[1]*b[2] - a[2]*b[1] + a[3]*b[1];
         
         return new double[] {w, x, y, z};
-    }
-
-    /**
-     * Internal method to get W quaternion component
-     * @return W component of rotation quaternion
-     */
-    protected double getQuaternionW() {
-        return ahrs.getQuaternionW();
-    }
-
-    /**
-     * Internal method to get X quaternion component
-     * @return X component of rotation quaternion
-     */
-    protected double getQuaternionX() {
-        return ahrs.getQuaternionX();
-    }
-    
-    /**
-     * Internal method to get Y quaternion component
-     * @return Y component of rotation quaternion
-     */
-    protected double getQuaternionY() {
-        return ahrs.getQuaternionY();
-    }
-    
-    /**
-     * Internal method to get Z quaternion component
-     * @return Z component of rotation quaternion
-     */
-    protected double getQuaternionZ() {
-        return ahrs.getQuaternionZ();
-    }
-
-    /**
-     * @return A vector of the robot's acceleration
-     *         WITHOUT WORLD ADJUSTMENTS
-     */
-    public Vector3D getLocalAccel() {
-        return new Vector3D();
-    }
-
-    /**
-     * @return A vector of the robot's acceleration in
-     *         the world.
-     */
-    public Vector3D getAccel() {
-        
-        return new Vector3D();
     }
 
     /**
