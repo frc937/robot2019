@@ -73,6 +73,55 @@ class IMU {
     }
 
     /**
+     * Internal method to get W quaternion component
+     * @return W component of rotation quaternion
+     */
+    protected double getQuaternionW() {
+        return ahrs.getQuaternionW();
+    }
+
+    /**
+     * Internal method to get X quaternion component
+     * @return X component of rotation quaternion
+     */
+    protected double getQuaternionX() {
+        return ahrs.getQuaternionX();
+    }
+    
+    /**
+     * Internal method to get Y quaternion component
+     * @return Y component of rotation quaternion
+     */
+    protected double getQuaternionY() {
+        return ahrs.getQuaternionY();
+    }
+    
+    /**
+     * Internal method to get Z quaternion component
+     * @return Z component of rotation quaternion
+     */
+    protected double getQuaternionZ() {
+        return ahrs.getQuaternionZ();
+    }
+
+    /**
+     * @return A vector of the robot's acceleration
+     *         WITHOUT WORLD ADJUSTMENTS
+     */
+    public Vector3D getLocalAccel() {
+        return new Vector3D();
+    }
+
+    /**
+     * @return A vector of the robot's acceleration in
+     *         the world.
+     */
+    public Vector3D getAccel() {
+        
+        return new Vector3D();
+    }
+
+    /**
      * Turns a vector in the context of the robot into
      * a vector in the context of the world. This only
      * changes the direction, you still have to use the
@@ -106,42 +155,11 @@ class IMU {
         double[] R = new double[] {w, -x, -y, -z};
         
         //take hamilton products
-        double[] P = hamiltonProduct(r, p);
-        P = hamiltonProduct(P, R);
+        p = hamiltonProduct(r, p);
+        p = hamiltonProduct(p, R);
 
-        return new Vector3D(P[1], P[2], P[3]);
-    }
-
-    /**
-     * Internal method to get W quaternion component
-     * @return W component of rotation quaternion
-     */
-    protected double getQuaternionW() {
-        return ahrs.getQuaternionW();
-    }
-
-    /**
-     * Internal method to get X quaternion component
-     * @return X component of rotation quaternion
-     */
-    protected double getQuaternionX() {
-        return ahrs.getQuaternionX();
-    }
-    
-    /**
-     * Internal method to get Y quaternion component
-     * @return Y component of rotation quaternion
-     */
-    protected double getQuaternionY() {
-        return ahrs.getQuaternionY();
-    }
-    
-    /**
-     * Internal method to get Z quaternion component
-     * @return Z component of rotation quaternion
-     */
-    protected double getQuaternionZ() {
-        return ahrs.getQuaternionZ();
+        Vector3D v = new Vector3D(p[1], p[2], p[3]);
+        return v;
     }
 
 }
