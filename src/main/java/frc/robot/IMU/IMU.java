@@ -126,17 +126,9 @@ class IMU {
 
     /**
      * Turns a vector in the context of the robot into
-     * a vector in the context of the world. This only
-     * changes the direction, you still have to use the
-     * position vectors to put it on a grid.
-     * <p>
-     * Most data on the robot changes where it is from
-     * depending on where the robot is at the time it
-     * takes a measurement. This takes a value like
-     * 3 meters from the front of the robot, and gives
-     * that a correct x,y,z value in the world
+     * a vector in the context of the world
      * @param vector 3D local vector to transform
-     * @return 3D world vector
+     * @return 3D world vector corrected for robot rotation
      */
     public Vector3D l2wTransform(Vector3D vector) {
         
@@ -163,6 +155,25 @@ class IMU {
 
         Vector3D v = new Vector3D(p[1], p[2], p[3]);
         return v;
+    }
+
+    /**
+     * Turns a vector of sensor data into a displacement
+     * vector that can be put on a map.
+     * <p>
+     * Takes in something like distance straight ahead of
+     * 3 meters, and turns it into a point in the world.
+     * @param vector data to transform
+     * @return displacement vector in the world
+     */
+    public Vector3D sensorVectorToWorldPoint(Vector3D vector) {
+        //rotate vector
+        vector = l2wTransform(vector);
+
+        //translate vector
+        vector.add(getDisplacement());
+
+        return vector;
     }
 
 }
