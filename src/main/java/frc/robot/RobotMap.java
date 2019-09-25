@@ -4,13 +4,11 @@
  * Magic numbers are numbers with no explanation of why they are what they are.
  * Most of them are port numbers or stuff like that.
  * 
- * They are in all caps rather than camelcase so you know not to mess with them.
+ * They are in ALL_CAPS rather than CamelCase so you know not to mess with them.
  */
 
 
 package frc.robot;
-
-import edu.wpi.first.wpilibj.XboxController;
 
 public class RobotMap {
 
@@ -33,6 +31,9 @@ public class RobotMap {
   */
   public static final int ENCODER_INPUT_1 = 0;
   public static final int ENCODER_INPUT_2 = 1;
+
+  private static final double driveWheelDiameter = 0;
+  private static final double encoderAnglePerPulse = 1;
 
   public static final double DISTANCE_PER_PULSE = 0.05;
   
