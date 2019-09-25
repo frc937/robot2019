@@ -27,29 +27,72 @@ class IMU {
 
     /**
      * Constructor
-     * Put this in robot init
      */
     public IMU() {
         ahrs = new AHRS();
+        ahrs.resetDisplacement();
+        ahrs.enableBoardlevelYawReset(true);
+        ahrs.zeroYaw();
+
         displacement = new Vector3D();
         velocity = new Vector3D();
     }
 
     /**
-     * Keeps track of position updates
-     * Put this in robot periodic
+     * @return World-centric vector of robot acceleration
      */
-    public void update() {
+    public Vector3D getAcceleration() {
+        //get components
+        double x = ahrs.getWorldLinearAccelX();
+        double y = ahrs.getWorldLinearAccelY();
+        double z = ahrs.getWorldLinearAccelZ();
 
+        return new Vector3D(x, y, z);
     }
 
     /**
-     * @return A vector of the robot's acceleration in
-     *         the world.
+     * @return World-centric vector of robot velocity
      */
-    public Vector3D getAccel() {
-        
-        return new Vector3D();
+    public Vector3D getVelocity() {
+        //get components
+        double x = ahrs.getVelocityX();
+        double y = ahrs.getVelocityY();
+        double z = ahrs.getVelocityZ();
+
+        return new Vector3D(x, y, z);
+    }
+
+    /**
+     * @return World-centric vector of robot displacement
+     */
+    public Vector3D getDisplacement() {
+        //get components
+        double x = ahrs.getDisplacementX();
+        double y = ahrs.getDisplacementY();
+        double z = ahrs.getDisplacementZ();
+
+        return new Vector3D(x, y, z);
+    }
+
+    /**
+     * @return Returns the current yaw value (in degrees, from -180 to 180)
+     */
+    public double getYaw() {
+        return ahrs.getYaw();
+    }
+
+    /**
+     * @return Returns the current pitch value (in degrees, from -180 to 180)
+     */
+    public double getPitch() {
+        return ahrs.getPitch();
+    }
+
+    /**
+     * @return Returns the current roll value (in degrees, from -180 to 180)
+     */
+    public double getRoll() {
+        return ahrs.getRoll();
     }
 
     /**
