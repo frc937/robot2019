@@ -29,10 +29,10 @@ public class Drivetrain extends Subsystem {
   * constructor (run whenever the: = new Drivetrain() code is run)
   */
   public Drivetrain() {
-    frontLeft = new Talon(RobotMap.FRONT_LEFT_PORT);
-    frontRight = new Talon(RobotMap.FRONT_RIGHT_PORT);
-    backLeft = new Talon(RobotMap.BACK_LEFT_PORT);
-    backRight = new Talon(RobotMap.BACK_RIGHT_PORT);
+    frontLeft = new Talon(RobotMap.DRIVE_FRONT_LEFT_PORT);
+    frontRight = new Talon(RobotMap.DRIVE_FRONT_RIGHT_PORT);
+    backLeft = new Talon(RobotMap.DRIVE_BACK_LEFT_PORT);
+    backRight = new Talon(RobotMap.DRIVE_BACK_RIGHT_PORT);
 
     frontLeft.setInverted(false);
     frontRight.setInverted(false);
