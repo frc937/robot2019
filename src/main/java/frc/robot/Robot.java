@@ -56,7 +56,7 @@ public class Robot extends TimedRobot {
   public static ClawMove moveSolenoid;
   public static ClawPush pushSolenoid;
 
-  public IMU imu;
+  public static IMU imu;
 
   //private variables
   private Camera leftCamera;

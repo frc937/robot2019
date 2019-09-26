@@ -31,14 +31,12 @@ public class DriveFieldOriented extends Command {
         double y = Robot.oi.getLeftYAxis();
         Vector3D joystickVector = new Vector3D(x, y, 0);
 
-
-
-
-
+        //transform vector
+        Vector3D controlVector = Robot.imu.w2lTransform(joystickVector);
 
         Robot.drivetrain.move(
-            -Robot.oi.getScaledLeftXAxis(), 
-            Robot.oi.getScaledLeftYAxis(), 
+            controlVector.getX(), 
+            controlVector.getY(),
             Robot.oi.getScaledRightXAxis()
         );
     }
