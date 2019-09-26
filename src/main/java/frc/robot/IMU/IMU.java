@@ -17,7 +17,7 @@ import frc.robot.IMU.Vector3D;
  * <p>
  * You can assume that any value you get from
  * here is not very accurate, but acceptably
- * close. All of the units are metric.
+ * close.
  */
 class IMU {
 
