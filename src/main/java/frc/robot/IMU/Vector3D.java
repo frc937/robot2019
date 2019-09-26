@@ -7,7 +7,7 @@ package frc.robot.IMU;
  * like scalar multiplication, vector
  * addition, dot products, and cross products.
  */
-class Vector3D {
+public class Vector3D {
     
     //variables
     protected double x, y, z;

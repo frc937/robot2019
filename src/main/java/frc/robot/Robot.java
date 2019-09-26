@@ -33,6 +33,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 
 import frc.robot.subsystems.*;
 import frc.robot.commands.motion.DriveRoboOriented;
+import frc.robot.IMU.*;
 
 
 public class Robot extends TimedRobot {
@@ -54,6 +55,8 @@ public class Robot extends TimedRobot {
   public static ClawGrab grabSolenoid;
   public static ClawMove moveSolenoid;
   public static ClawPush pushSolenoid;
+
+  public IMU imu;
 
   //private variables
   private Camera leftCamera;
@@ -92,6 +95,8 @@ public class Robot extends TimedRobot {
     //initialize action mappings
     oi = new OperatingInterface();
 
+    //init inertial measurement unit
+    imu = new IMU();
   }
 
   /**

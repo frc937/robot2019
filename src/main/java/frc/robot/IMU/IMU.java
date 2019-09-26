@@ -8,6 +8,7 @@ import frc.robot.IMU.Vector3D;
 
 //https://math.stackexchange.com/questions/40164/how-do-you-rotate-a-vector-by-a-unit-quaternion
 //https://en.wikipedia.org/wiki/Quaternion#Hamilton_product
+//https://math.stackexchange.com/questions/1375754/clarification-of-definition-of-inverse-with-quaternions
 
 /**
  * Intertial Measurement Unit (IMU)
@@ -19,7 +20,7 @@ import frc.robot.IMU.Vector3D;
  * here is not very accurate, but acceptably
  * close.
  */
-class IMU {
+public class IMU {
 
     //variables
     protected AHRS ahrs;
@@ -141,6 +142,52 @@ class IMU {
         double x = ahrs.getQuaternionX();
         double y = ahrs.getQuaternionY();
         double z = ahrs.getQuaternionZ();
+        
+        double[] r = new double[] {w, x, y, z};
+        double[] R = new double[] {w, -x, -y, -z};
+        
+        //take hamilton products
+        p = hamiltonProduct(r, p);
+        p = hamiltonProduct(p, R);
+
+        Vector3D v = new Vector3D(p[1], p[2], p[3]);
+        return v;
+    }
+
+    /**
+     * Turns a vector in the context of the world into
+     * a vector in the context of the robot
+     * @param vector 3D world vector to transform
+     * @return 3D local vector corrected for robot rotation
+     */
+    public Vector3D w2lTransform(Vector3D vector) {
+        
+        //grab vector components
+        double[] p = new double[] {
+            0,
+            vector.getX(),
+            vector.getY(),
+            vector.getZ()
+        };
+
+        //grab quaternion components
+        double w = ahrs.getQuaternionW();
+        double x = ahrs.getQuaternionX();
+        double y = ahrs.getQuaternionY();
+        double z = ahrs.getQuaternionZ();
+
+        //get quaternion magnitude
+        double w2 = Math.pow(w, 2);
+        double x2 = Math.pow(x, 2);
+        double y2 = Math.pow(y, 2);
+        double z2 = Math.pow(z, 2);
+        double mag = Math.sqrt(w2 + x2 + y2 + z2);
+
+        //invert quaternion components
+        w /= mag;
+        x /= mag;
+        y /= mag;
+        z /= mag;
         
         double[] r = new double[] {w, x, y, z};
         double[] R = new double[] {w, -x, -y, -z};
