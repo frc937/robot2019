@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.POVButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.RobotState;
 import frc.robot.commands.manipulation.claw.*;
 import frc.robot.commands.manipulation.elevator.*;
 
