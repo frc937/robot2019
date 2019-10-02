@@ -1,9 +1,4 @@
 /*
-* This class contains
-* Main loops and methods for the robot
-*/
-
-/*
 * Some valuable info:
 * 
 * If you need help, this directory is a good place to start
@@ -15,10 +10,18 @@
 *
 * Use those links. They will help you.
 *
-* Google is also a valuable tool. Use it to your advantage.
+* Google is an extremely valuable tool. Use it to your advantage.
+* This can help:
+* https://lmgtfy.com/?q=how+to+use+google&iie=1
 *
 * Don't shy away from digging through FRC java programming forums
 * to see other people's solutions to problems similar to yours.
+*/
+
+
+/*
+* This class contains
+* Main loops and methods for the robot
 */
 
 package frc.robot;
@@ -38,6 +41,9 @@ public class Robot extends TimedRobot {
 
   /*
   * Variables
+  *
+  * It's always nice to declare your variables right off the bat.
+  * It'll help you keep organized and ease the whole process
   */
   public static XboxController controller;
 
@@ -59,6 +65,12 @@ public class Robot extends TimedRobot {
 
   /*
   * Constructor
+  * 
+  * This is what initializes objects when they are created.
+  *
+  * Notice that here it is called robotInit. In all the other
+  * classes it will share its name with the class it is in.
+  * (See any other class if you aren't sure what I mean by that.)
   */
   @Override
   public void robotInit() {
