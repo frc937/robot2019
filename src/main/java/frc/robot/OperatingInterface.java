@@ -152,14 +152,11 @@ public class OperatingInterface {
             rightBumper.whenPressed(new PushIn());
         }
         */
-        leftBumper.whenPressed(new ClawOpen());
-        rightBumper.whenPressed(new ClawClose());
-        aButton.whenPressed(new PushOut());
-        bButton.whenPressed(new PushIn());
-        dpadLeft.whenPressed(new ClawUp());
-        dpadRight.whenPressed(new ClawDown());
+       
+        leftBumper.whenPressed(new PushOut());
+        rightBumper.whenPressed(new PushIn());
         
-       dpadUp.whileHeld(new Lift());
+        dpadUp.whileHeld(new Lift());
         dpadDown.whileHeld(new Lower());
 
         /*

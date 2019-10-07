@@ -29,10 +29,6 @@ public class RobotMap {
   //solenoid
   public static final int CLAW_PUSH_OUT_PORT  = 0;
   public static final int CLAW_PUSH_IN_PORT = 1;
-  public static final int CLAW_MOVE_OUT_PORT = 2;
-  public static final int CLAW_MOVE_IN_PORT = 3;
-  public static final int CLAW_GRAB_OUT_PORT = 4;
-  public static final int CLAW_GRAB_IN_PORT = 5;
 
   //controller
   public static final int CONTROLLER_NUMBER = 0;

@@ -10,7 +10,7 @@ import frc.robot.RobotState;
 
 public class PushIn extends Command {
     public PushIn() {
-        requires(Robot.moveSolenoid);
+        requires(Robot.pushSolenoid);
         setTimeout(0.9);
     }
 

@@ -27,8 +27,6 @@ public class Robot extends TimedRobot {
   public static Drivetrain drivetrain;
   private Camera leftCamera;
   private Camera rightCamera;
-  public static ClawGrab grabSolenoid;
-  public static ClawMove moveSolenoid;
   public static ClawPush pushSolenoid;
 
   //solenoids
@@ -61,8 +59,6 @@ public class Robot extends TimedRobot {
 
     drivetrain = new Drivetrain();
 
-    grabSolenoid = new ClawGrab();
-    moveSolenoid = new ClawMove();
     pushSolenoid = new ClawPush();
 
     leftCamera = new Camera();
