@@ -30,7 +30,6 @@ public class DriveRoboOriented extends Command {
 
     @Override
     protected boolean isFinished() {
-        //return isCanceled();
         return false;
     }
 
