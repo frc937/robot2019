@@ -25,12 +25,10 @@ public class Drivetrain extends Subsystem {
 
   private static MecanumDrive drivetrain;
 
-  //private XboxController controller;
 
   /*
   * constructor (run whenever the: = new Drivetrain() code is run)
   */
- // public Drivetrain(XboxController controller) {
   public Drivetrain() {
     frontLeft = new Talon(RobotMap.FRONT_LEFT_PORT);
     frontRight = new Talon(RobotMap.FRONT_RIGHT_PORT);

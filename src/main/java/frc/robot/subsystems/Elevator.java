@@ -22,7 +22,6 @@ public class Elevator extends Subsystem {
     /*
     * constructor
     */
-    //public Elevator(XboxController controller) {
     public Elevator() {
         elevatorMotor1 = new Talon(RobotMap.ELEVATOR1_PORT);
         elevatorMotor2 = new Talon(RobotMap.ELEVATOR2_PORT);
